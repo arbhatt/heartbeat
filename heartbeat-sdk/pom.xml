@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.adp.enets</groupId>
+    <artifactId>heartbeat-sdk</artifactId>
+    <version>${version.number}</version>
+
+    <name>Heartbeat SDK Library</name>
+    <description>
+        This library interacts with the monitoring server to register for monitoring and periodically sends heartbeat
+        Monitoring server detects this heartbeat and determines if the process is runnig or down
+        This automatically detects the hostname, PID and process signature and uses it to register to monitoring server
+        Additional parameters can be provided to identify this process.
+
+        To use this, call HeartBeatService::initialize when the process starts.
+        Call HeartBeatService::shutdown when the process gracefully shuts down.
+    </description>
+
+
+    <properties>
+        <major.version>1</major.version>
+        <minor.version>0</minor.version>
+        <build.version>SNAPSHOT</build.version>
+        <version.number>${major.version}.${minor.version}-${build.version}</version.number>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-commons</artifactId>
+            <version>1.1.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.3.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>4.3.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.2</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160212</version>
+        </dependency>
+        <dependency>
+            <groupId>com.poaex.app.monitor</groupId>
+            <artifactId>heartbeat-model</artifactId>
+            <version>1.0-1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-cli</groupId>
+            <artifactId>commons-cli</artifactId>
+            <version>1.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.adp.enets.heartbeat.service.HttpHeartBeatService</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <!-- Currently working on the below: bhattaa1
+            <plugin>
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>2.0.6</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.proguard</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>5.3.2</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals><goal>proguard</goal></goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <proguardVersion>5.3.2</proguardVersion>
+                    <options>
+                        <option>-keep public class com.adp.enets.heartbeat.service.HttpHeartBeatService{public void initialize();}</option>
+                        <option>-keep public class com.adp.enets.heartbeat.service.HttpHeartBeatService{public void initialize(org.apache.commons.lang3.tuple.Pair[]);}</option>
+                        <option>-keep public class com.adp.enets.heartbeat.Heartbeat{public static void main(java.lang.String[]);}</option>
+                        <option>-keep public class com.adp.enets.heartbeat.domain.Heartbeat{*;}</option>
+                        <option>-keep class !com.adp.enets.** { *; }</option>
+                    </options>
+                    <libs>
+                        <lib>${java.home}/lib/rt.jar</lib>
+                        <lib>${java.home}/lib/jce.jar</lib>
+                    </libs>
+                </configuration>
+            </plugin>
+            -->
+        </plugins>
+    </build>
+
+</project>
