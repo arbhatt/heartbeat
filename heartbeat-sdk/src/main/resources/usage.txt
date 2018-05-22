@@ -1,0 +1,5 @@
+This file indicates how to use this SDK
+
+--help : shows help (this text)
+
+--list : Lists all the profiles monitored with your identity
