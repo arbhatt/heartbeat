@@ -1,21 +1,25 @@
-package com.poaex.app.monitor.heartbeat.service.entity;
+package com.poaex.app.monitor.heartbeat.svc.entity;
 
 
-import com.poaex.app.monitor.heartbeat.model.Heartbeat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 
 @Data
 @Document
 @NoArgsConstructor
 @EqualsAndHashCode
-public class HeartbeatLog {
+public class NotificationLog {
     @Id
     private String id;
     private String instanceId;
-    private Long lastNotifiedTime;
+    private long lastNotifiedTime;
+    private List<String> recepients;
+    private boolean isNotified;
+    private boolean isNotificationSuccess;
 }

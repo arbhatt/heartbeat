@@ -1,8 +1,8 @@
-package com.poaex.app.monitor.heartbeat.service.service;
+package com.poaex.app.monitor.heartbeat.svc.service;
 
-import com.poaex.app.monitor.heartbeat.service.entity.AppRegistration;
-import com.poaex.app.monitor.heartbeat.service.repository.AppRegistrationRepository;
-import com.poaex.app.monitor.heartbeat.service.repository.HeartbeatLogRepository;
+import com.poaex.app.monitor.heartbeat.svc.entity.AppRegistration;
+import com.poaex.app.monitor.heartbeat.svc.repository.AppRegistrationRepository;
+import com.poaex.app.monitor.heartbeat.svc.repository.HeartbeatLogRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.poaex.app.monitor.heartbeat.service.HeartbeatService.DB_PAGE_SIZE;
-import static com.poaex.app.monitor.heartbeat.service.HeartbeatService.FIRST_PAGE;
-import static com.poaex.app.monitor.heartbeat.service.HeartbeatService.HB_RESPONSE_THRESHOLD_MILLIS;
+import static com.poaex.app.monitor.heartbeat.svc.MonitorHeartbeatSvc.DB_PAGE_SIZE;
+import static com.poaex.app.monitor.heartbeat.svc.MonitorHeartbeatSvc.FIRST_PAGE;
+import static com.poaex.app.monitor.heartbeat.svc.MonitorHeartbeatSvc.HB_RESPONSE_THRESHOLD_MILLIS;
 
 @Service
 @Slf4j

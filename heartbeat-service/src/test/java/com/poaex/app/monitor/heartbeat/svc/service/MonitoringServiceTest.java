@@ -1,9 +1,9 @@
-package com.poaex.app.monitor.heartbeat.service.service;
+package com.poaex.app.monitor.heartbeat.svc.service;
 
-import com.poaex.app.monitor.heartbeat.service.entity.AppRegistration;
-import com.poaex.app.monitor.heartbeat.service.entity.HeartbeatLog;
-import com.poaex.app.monitor.heartbeat.service.repository.AppRegistrationRepository;
-import com.poaex.app.monitor.heartbeat.service.repository.HeartbeatLogRepository;
+import com.poaex.app.monitor.heartbeat.svc.entity.AppRegistration;
+import com.poaex.app.monitor.heartbeat.svc.entity.HeartbeatLog;
+import com.poaex.app.monitor.heartbeat.svc.repository.AppRegistrationRepository;
+import com.poaex.app.monitor.heartbeat.svc.repository.HeartbeatLogRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;

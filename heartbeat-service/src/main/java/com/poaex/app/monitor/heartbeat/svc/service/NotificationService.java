@@ -1,9 +1,9 @@
-package com.poaex.app.monitor.heartbeat.service.service;
+package com.poaex.app.monitor.heartbeat.svc.service;
 
-import com.poaex.app.monitor.heartbeat.service.HeartbeatService;
-import com.poaex.app.monitor.heartbeat.service.entity.AppRegistration;
-import com.poaex.app.monitor.heartbeat.service.entity.NotificationLog;
-import com.poaex.app.monitor.heartbeat.service.repository.NotificationLogRepository;
+import com.poaex.app.monitor.heartbeat.svc.MonitorHeartbeatSvc;
+import com.poaex.app.monitor.heartbeat.svc.entity.AppRegistration;
+import com.poaex.app.monitor.heartbeat.svc.entity.NotificationLog;
+import com.poaex.app.monitor.heartbeat.svc.repository.NotificationLogRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,7 +33,7 @@ public class NotificationService {
         if (!notifications.hasContent()
                 || notifications.hasContent() &&
                 (Instant.now().toEpochMilli() - notifications.getContent().get(0).getLastNotifiedTime())
-                        > HeartbeatService.NOTIFICATION_THROTTLE_LIMIT) {
+                        > MonitorHeartbeatSvc.NOTIFICATION_THROTTLE_LIMIT) {
             //Sample implementation - to be changed
             log.info("Sending notification for non responsive application " + appRegistration);
             NotificationLog n = new NotificationLog();

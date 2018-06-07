@@ -1,10 +1,9 @@
-package com.poaex.app.monitor.heartbeat.service.config;
+package com.poaex.app.monitor.heartbeat.svc.config;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
-import com.mongodb.connection.ConnectionPoolSettings;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +13,6 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class MongoDbConfig {

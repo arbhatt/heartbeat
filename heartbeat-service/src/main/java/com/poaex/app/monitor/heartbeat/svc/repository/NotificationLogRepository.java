@@ -1,7 +1,6 @@
-package com.poaex.app.monitor.heartbeat.service.repository;
+package com.poaex.app.monitor.heartbeat.svc.repository;
 
-import com.poaex.app.monitor.heartbeat.service.entity.HeartbeatLog;
-import com.poaex.app.monitor.heartbeat.service.entity.NotificationLog;
+import com.poaex.app.monitor.heartbeat.svc.entity.NotificationLog;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;

@@ -1,24 +1,15 @@
-package com.poaex.app.monitor.heartbeat.service.service;
+package com.poaex.app.monitor.heartbeat.svc.service;
 
 
 import com.poaex.app.monitor.heartbeat.exception.service.ServiceSecurityException;
 import com.poaex.app.monitor.heartbeat.model.Heartbeat;
-import com.poaex.app.monitor.heartbeat.service.entity.HeartbeatLog;
+import com.poaex.app.monitor.heartbeat.model.MonitoringProfile;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.SecretKeySpec;
-import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.Base64;
 
 
 @Service
@@ -42,9 +33,12 @@ public class IdentityService {
     }
 
 
-    public String createInstanceId(Heartbeat hb) throws ServiceSecurityException {
-        final String identityString = String.format("{%s}-{%s}-{%s}-{%s}", hb.getPid(), hb.getProcessSignature(),
-                hb.getHostname(), hb.getEnvironment());
+    public String createInstanceId(MonitoringProfile monitoringProfile) throws ServiceSecurityException {
+        final String identityString = String.format("{%s}-{%s}-{%s}-{%s}",
+                monitoringProfile.getPid(),
+                monitoringProfile.getProcessSignature(),
+                monitoringProfile.getHostname(),
+                monitoringProfile.getEnvironment());
         return String.valueOf(encrypt(identityString));
 
     }

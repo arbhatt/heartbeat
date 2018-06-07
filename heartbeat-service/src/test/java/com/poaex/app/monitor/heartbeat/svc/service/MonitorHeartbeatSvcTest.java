@@ -1,11 +1,13 @@
-package com.poaex.app.monitor.heartbeat.service.service;
+package com.poaex.app.monitor.heartbeat.svc.service;
 
 import com.poaex.app.monitor.heartbeat.exception.service.ServiceSecurityException;
 import com.poaex.app.monitor.heartbeat.model.Heartbeat;
-import com.poaex.app.monitor.heartbeat.service.entity.AppRegistration;
-import com.poaex.app.monitor.heartbeat.service.entity.HeartbeatLog;
-import com.poaex.app.monitor.heartbeat.service.repository.AppRegistrationRepository;
-import com.poaex.app.monitor.heartbeat.service.repository.HeartbeatLogRepository;
+import com.poaex.app.monitor.heartbeat.model.MonitoringProfile;
+import com.poaex.app.monitor.heartbeat.svc.entity.AppRegistration;
+import com.poaex.app.monitor.heartbeat.svc.entity.HeartbeatLog;
+import com.poaex.app.monitor.heartbeat.svc.repository.AppRegistrationRepository;
+import com.poaex.app.monitor.heartbeat.svc.repository.HeartbeatLogRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -14,13 +16,15 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.data.domain.*;
 
+import java.util.UUID;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class HeartbeatServiceTest {
+public class MonitorHeartbeatSvcTest {
 
     @Mock
     private HeartbeatLogRepository heartbeatLogRepository;
@@ -37,26 +41,31 @@ public class HeartbeatServiceTest {
     @InjectMocks
     private final HeartbeatService hbs = new HeartbeatService();
 
+    private UUID uuid;
+
+    @Before
+    public void populateUuid() {
+        uuid = UUID.randomUUID();
+    }
+
     @Test
     public void startMonitoring() throws ServiceSecurityException {
-        Heartbeat pr = stubHeartbeat().start().beat();
+        MonitoringProfile mp = stubMonitoringProfile();
 
         mockForRegistration();
-        hbs.startMonitoring(pr);
+        hbs.startMonitoring(mp);
 
-        Mockito.verify(heartbeatLogRepository).save(any(HeartbeatLog.class));
         Mockito.verify(appRegistrationRepository).save(any(AppRegistration.class));
 
     }
 
     @Test
     public void stopMonitoring() throws Exception {
-        Heartbeat pr = stubHeartbeat().start().beat();
+        MonitoringProfile mp = stubMonitoringProfile();
 
         mockForRegistration();
-        hbs.stopMonitoring(pr);
+        hbs.stopMonitoring(mp);
 
-        Mockito.verify(heartbeatLogRepository, never()).save(any(HeartbeatLog.class));
         Mockito.verify(appRegistrationRepository).save(any(AppRegistration.class));
     }
 
@@ -65,15 +74,15 @@ public class HeartbeatServiceTest {
         when(appRegistrationRepository.findByInstanceId(anyString(), any(PageRequest.class))).thenReturn(appRegistrationPage);
     }
 
+    private MonitoringProfile stubMonitoringProfile() {
+        MonitoringProfile mp = new MonitoringProfile();
+        mp.setMonitoringProfileId(uuid);
+        return mp ;
+    }
+
     private Heartbeat stubHeartbeat() {
         Heartbeat pr = new Heartbeat();
-        pr.setPid("T_0000");
-        pr.setHostname("H_WHISPER");
-        pr.setProcessSignature("P_ZOMBIE");
-
-
-        pr.setEnvironment("TEST");
-
+        pr.setMonitoringProfileId(uuid);
         return pr;
     }
 }

@@ -50,16 +50,17 @@
         </dependency>
         <!-- The idea is to use the SDK to monitor itself
         Commenting out for now, till we develop this completely
+        -->
         <dependency>
-            <groupId>com.adp.enets</groupId>
+            <groupId>com.poaex.app.monitor</groupId>
             <artifactId>heartbeat-sdk</artifactId>
-            <version>${version.number}</version>
+            <version>1.0-1</version>
         </dependency>
--->
+
         <dependency>
             <groupId>com.poaex.app.monitor</groupId>
             <artifactId>heartbeat-model</artifactId>
-            <version>1.0-1</version>
+            <version>1.1-1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
