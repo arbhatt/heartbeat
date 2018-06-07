@@ -1,6 +1,6 @@
 package com.poaex.app.monitor.heartbeat.exception.service;
 
-public class ServiceSecurityException extends Exception {
+public class ServiceSecurityException extends ServiceException {
     public ServiceSecurityException() {
         super();
     }
